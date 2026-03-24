@@ -1,11 +1,5 @@
 export default async function handler(req, res) {
-    // CORS設定
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
-  
-    if (req.method === 'OPTIONS') {
-      return res.status(200).end();
-    }
   
     try {
       const response = await fetch(
@@ -22,26 +16,14 @@ export default async function handler(req, res) {
               property: '公開',
               checkbox: { equals: true },
             },
-            sorts: [
-              {
-                property: '日付',
-                direction: 'descending',
-              },
-            ],
           }),
         }
       );
   
       const data = await response.json();
   
-      const posts = data.results.map(page => ({
-        id:    page.id,
-        title: page.properties['名前']?.title?.[0]?.plain_text || '無題',
-        date:  page.properties['日付']?.date?.start || '',
-        body:  page.properties['テキスト']?.rich_text?.[0]?.plain_text || '',
-      }));
-  
-      return res.status(200).json({ posts });
+      // 生データをそのまま返す（デバッグ用）
+      return res.status(200).json(data);
   
     } catch (err) {
       return res.status(500).json({ error: err.message });
