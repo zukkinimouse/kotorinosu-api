@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>フードロス通知 | 管理画面</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #fff9f5 0%, #fce8ec 100%);
+      padding: 24px 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(220, 80, 120, 0.12);
+      padding: 36px 28px;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #b5305a;
+      text-align: center;
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+    }
+
+    /* テキストエリア */
+    #messageText {
+      width: 100%;
+      min-height: 180px;
+      padding: 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      line-height: 1.9;
+      color: #333;
+      background: #fff8fa;
+      border: 2px solid #f0c0ce;
+      border-radius: 12px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    #messageText:focus {
+      border-color: #e91e8c;
+    }
+
+    /* 送信ボタン */
+    #sendBtn {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 20px 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, #f06292, #e91e8c);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(233, 30, 140, 0.30);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      letter-spacing: 0.05em;
+    }
+
+    #sendBtn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(233, 30, 140, 0.38);
+    }
+
+    #sendBtn:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 3px 12px rgba(233, 30, 140, 0.25);
+    }
+
+    #sendBtn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* フィードバックメッセージ */
+    #feedback {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      min-height: 24px;
+    }
+
+    #feedback.success {
+      color: #2e7d32;
+    }
+
+    #feedback.error {
+      color: #c62828;
+    }
+
+    #feedback.warn {
+      color: #e65100;
+    }
+
+    #feedback:empty {
+      display: none;
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: #ccc;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <p class="card-title">通知文を編集して送信</p>
+
+    <textarea id="messageText">🎂 本日17時のお知らせ
+
+いちごショート・モンブランが
+各2個残っています。
+18時閉店です。お早めにどうぞ！</textarea>
+
+    <button id="sendBtn">🎂 この内容で送信する</button>
+
+    <div id="feedback"></div>
+  </div>
+
+  <p class="footer">kotorinosu-api デモ管理画面</p>
+
+  <script>
+    const API_ENDPOINT = 'https://kotorinosu-api.vercel.app/api/line-notify';
+
+    const sendBtn     = document.getElementById('sendBtn');
+    const messageText = document.getElementById('messageText');
+    const feedback    = document.getElementById('feedback');
+
+    // フィードバック表示ユーティリティ
+    function showFeedback(message, type) {
+      feedback.textContent = message;
+      feedback.className = type; // 'success' | 'error' | 'warn'
+    }
+
+    sendBtn.addEventListener('click', async () => {
+      const text = messageText.value.trim();
+
+      // 空文字チェック
+      if (text === '') {
+        showFeedback('文章を入力してください', 'warn');
+        messageText.focus();
+        return;
+      }
+
+      sendBtn.disabled = true;
+      feedback.textContent = '';
+      feedback.className = '';
+
+      try {
+        const res = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text }),
+        });
+
+        if (res.ok) {
+          showFeedback('✅ 送信しました！', 'success');
+        } else {
+          const data = await res.json().catch(() => ({}));
+          console.error('API エラー:', data);
+          showFeedback('❌ 送信に失敗しました', 'error');
+        }
+      } catch (err) {
+        console.error('通信エラー:', err);
+        showFeedback('❌ 送信に失敗しました', 'error');
+      } finally {
+        sendBtn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
