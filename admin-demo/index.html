@@ -43,8 +43,44 @@
       letter-spacing: 0.04em;
     }
 
+    /* ---- 通知ブロック ---- */
+
+    /* ブロック間の区切り線 */
+    .notify-block + .notify-block {
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1.5px dashed #f0c0ce;
+    }
+
+    /* ブロック上部（削除ボタン行） */
+    .block-top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 6px;
+      min-height: 24px;
+    }
+
+    .block-delete-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ccc;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+      transition: color 0.18s, background 0.18s;
+    }
+
+    .block-delete-btn:hover {
+      color: #e91e8c;
+      background: #fff0f5;
+    }
+
     /* テキストエリア */
-    #messageText {
+    .block-textarea {
       width: 100%;
       min-height: 180px;
       padding: 16px;
@@ -60,202 +96,17 @@
       transition: border-color 0.2s ease;
     }
 
-    #messageText:focus {
+    .block-textarea:focus {
       border-color: #e91e8c;
     }
 
-    /* ショートカットエリア */
-    .shortcuts-area {
-      margin-top: 20px;
-    }
-
-    .shortcuts-section-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #b5305a;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .shortcuts-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    /* ショートカットボタン本体（既存の送信ボタンと同デザイン・小サイズ） */
-    .shortcut-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 14px;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: #ffffff;
-      background: linear-gradient(135deg, #f06292, #e91e8c);
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(233, 30, 140, 0.28);
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
-      -webkit-tap-highlight-color: transparent;
-      letter-spacing: 0.04em;
-    }
-
-    .shortcut-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 7px 20px rgba(233, 30, 140, 0.38);
-    }
-
-    .shortcut-btn:active {
-      transform: translateY(1px);
-      box-shadow: 0 2px 8px rgba(233, 30, 140, 0.22);
-    }
-
-    /* ショートカットボタン内の削除アイコン */
-    .shortcut-delete {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 17px;
-      height: 17px;
-      background: rgba(255, 255, 255, 0.28);
-      border-radius: 50%;
-      font-size: 9px;
-      flex-shrink: 0;
-      transition: background 0.15s;
-    }
-
-    .shortcut-delete:hover {
-      background: rgba(255, 255, 255, 0.52);
-    }
-
-    /* ＋追加ボタン */
-    .add-shortcut-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 10px 14px;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: #e91e8c;
-      background: transparent;
-      border: 2px dashed #f0c0ce;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      letter-spacing: 0.04em;
-    }
-
-    .add-shortcut-btn:hover {
-      border-color: #e91e8c;
-      background: #fff0f5;
-    }
-
-    /* ショートカット追加フォーム */
-    .shortcut-form {
-      display: none;
-      margin-top: 12px;
-      padding: 16px;
-      background: #fff8fa;
-      border: 1.5px solid #f0c0ce;
-      border-radius: 12px;
-    }
-
-    .shortcut-form.visible {
-      display: block;
-    }
-
-    .shortcut-form-row {
-      margin-bottom: 8px;
-    }
-
-    .shortcut-form input,
-    .shortcut-form textarea {
-      width: 100%;
-      padding: 10px 12px;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 14px;
-      color: #333;
-      background: #ffffff;
-      border: 1.5px solid #f0c0ce;
-      border-radius: 8px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .shortcut-form input:focus,
-    .shortcut-form textarea:focus {
-      border-color: #e91e8c;
-    }
-
-    .shortcut-form textarea {
-      min-height: 90px;
-      resize: vertical;
-      line-height: 1.7;
-    }
-
-    .shortcut-form-hint {
-      font-size: 11px;
-      color: #aaa;
-      margin-top: 4px;
-    }
-
-    .shortcut-form-actions {
-      display: flex;
-      gap: 8px;
-      justify-content: flex-end;
-      margin-top: 12px;
-    }
-
-    .btn-save-shortcut {
-      padding: 9px 22px;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-      background: linear-gradient(135deg, #f06292, #e91e8c);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(233, 30, 140, 0.25);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
-    }
-
-    .btn-save-shortcut:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(233, 30, 140, 0.35);
-    }
-
-    .btn-cancel-shortcut {
-      padding: 9px 18px;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: #b5305a;
-      background: transparent;
-      border: 1.5px solid #f0c0ce;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .btn-cancel-shortcut:hover {
-      border-color: #e91e8c;
-      background: #fff0f5;
-    }
-
-    /* 送信エリア全体（ボタン ↔ 確認パネルを内包） */
+    /* 送信エリア */
     .send-area {
-      margin-top: 20px;
+      margin-top: 16px;
     }
 
     /* 送信ボタン */
-    #sendBtn {
+    .send-btn {
       display: block;
       width: 100%;
       padding: 20px 16px;
@@ -268,30 +119,30 @@
       border-radius: 14px;
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(233, 30, 140, 0.30);
-      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.22s ease, max-height 0.22s ease;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.22s ease, max-height 0.22s ease, padding 0.22s ease;
       -webkit-tap-highlight-color: transparent;
       letter-spacing: 0.05em;
       overflow: hidden;
       max-height: 80px;
     }
 
-    #sendBtn:hover:not(:disabled) {
+    .send-btn:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 10px 28px rgba(233, 30, 140, 0.38);
     }
 
-    #sendBtn:active:not(:disabled) {
+    .send-btn:active:not(:disabled) {
       transform: translateY(1px);
       box-shadow: 0 3px 12px rgba(233, 30, 140, 0.25);
     }
 
-    #sendBtn:disabled {
+    .send-btn:disabled {
       opacity: 0.55;
       cursor: not-allowed;
     }
 
-    /* 送信ボタンを確認パネル表示中は縮小して非表示 */
-    #sendBtn.hidden {
+    /* 確認パネル表示中は送信ボタンを縮小して非表示 */
+    .send-btn.hidden {
       opacity: 0;
       max-height: 0;
       padding-top: 0;
@@ -300,14 +151,14 @@
     }
 
     /* 確認パネル */
-    #confirmPanel {
+    .confirm-panel {
       overflow: hidden;
       max-height: 0;
       opacity: 0;
       transition: max-height 0.3s ease, opacity 0.25s ease;
     }
 
-    #confirmPanel.visible {
+    .confirm-panel.visible {
       max-height: 400px;
       opacity: 1;
     }
@@ -348,8 +199,8 @@
       gap: 10px;
     }
 
-    /* 確認パネル：キャンセルボタン */
-    #cancelConfirmBtn {
+    /* 確認：キャンセルボタン */
+    .cancel-confirm-btn {
       flex: 1;
       padding: 14px 12px;
       font-family: 'Noto Sans JP', sans-serif;
@@ -364,13 +215,13 @@
       letter-spacing: 0.04em;
     }
 
-    #cancelConfirmBtn:hover {
+    .cancel-confirm-btn:hover {
       border-color: #e91e8c;
       background: #fff0f5;
     }
 
-    /* 確認パネル：送信確定ボタン */
-    #confirmSendBtn {
+    /* 確認：送信確定ボタン */
+    .do-send-btn {
       flex: 2;
       padding: 14px 12px;
       font-family: 'Noto Sans JP', sans-serif;
@@ -387,18 +238,41 @@
       letter-spacing: 0.04em;
     }
 
-    #confirmSendBtn:hover:not(:disabled) {
+    .do-send-btn:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 8px 22px rgba(233, 30, 140, 0.40);
     }
 
-    #confirmSendBtn:active:not(:disabled) {
+    .do-send-btn:active:not(:disabled) {
       transform: translateY(1px);
     }
 
-    #confirmSendBtn:disabled {
+    .do-send-btn:disabled {
       opacity: 0.55;
       cursor: not-allowed;
+    }
+
+    /* ブロック追加ボタン */
+    #addBlockBtn {
+      display: block;
+      width: 100%;
+      margin-top: 28px;
+      padding: 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #e91e8c;
+      background: transparent;
+      border: 2px dashed #f0c0ce;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    #addBlockBtn:hover {
+      border-color: #e91e8c;
+      background: #fff0f5;
     }
 
     /* フィードバックメッセージ */
@@ -410,21 +284,10 @@
       min-height: 24px;
     }
 
-    #feedback.success {
-      color: #2e7d32;
-    }
-
-    #feedback.error {
-      color: #c62828;
-    }
-
-    #feedback.warn {
-      color: #e65100;
-    }
-
-    #feedback:empty {
-      display: none;
-    }
+    #feedback.success { color: #2e7d32; }
+    #feedback.error   { color: #c62828; }
+    #feedback.warn    { color: #e65100; }
+    #feedback:empty   { display: none; }
 
     .footer {
       margin-top: 32px;
@@ -439,61 +302,11 @@
   <div class="card">
     <p class="card-title">通知文を編集して送信</p>
 
-    <textarea id="messageText">🎂 本日17時のお知らせ
+    <!-- 通知ブロック一覧（JSで動的に生成） -->
+    <div id="blockList"></div>
 
-いちごショート・モンブランが
-各2個残っています。
-18時閉店です。お早めにどうぞ！</textarea>
-
-    <!-- ショートカットエリア -->
-    <div class="shortcuts-area">
-      <div class="shortcuts-section-label">ショートカット</div>
-      <div class="shortcuts-list" id="shortcutsList">
-        <!-- ショートカットボタンはJSで動的に挿入 -->
-        <button class="add-shortcut-btn" id="addShortcutBtn">＋ 追加</button>
-      </div>
-
-      <!-- ショートカット追加フォーム -->
-      <div class="shortcut-form" id="shortcutForm">
-        <div class="shortcut-form-row">
-          <input
-            type="text"
-            id="shortcutLabel"
-            placeholder="ボタン名（例: 🎂 ケーキ残りわずか）"
-            maxlength="30"
-          />
-          <p class="shortcut-form-hint">ボタンに表示するラベルを入力してください</p>
-        </div>
-        <div class="shortcut-form-row">
-          <textarea
-            id="shortcutText"
-            placeholder="送信する文章を入力..."
-          ></textarea>
-          <p class="shortcut-form-hint">このボタンをクリックしたとき入力欄にセットされる文章です</p>
-        </div>
-        <div class="shortcut-form-actions">
-          <button class="btn-cancel-shortcut" id="cancelShortcutBtn">キャンセル</button>
-          <button class="btn-save-shortcut" id="saveShortcutBtn">保存する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 送信エリア（ボタン ↔ 確認パネルの切り替え） -->
-    <div class="send-area">
-      <button id="sendBtn">🎂 この内容で送信する</button>
-
-      <!-- 確認パネル（送信ボタン押下後に展開） -->
-      <div id="confirmPanel">
-        <div class="confirm-inner">
-          <p class="confirm-heading">📨 この内容を送信しますか？</p>
-          <div class="confirm-preview" id="confirmPreview"></div>
-          <div class="confirm-actions">
-            <button id="cancelConfirmBtn">キャンセル</button>
-            <button id="confirmSendBtn">✓ 送信する</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- ブロック追加ボタン -->
+    <button id="addBlockBtn">＋ 通知ブロックを追加</button>
 
     <div id="feedback"></div>
   </div>
@@ -502,204 +315,200 @@
 
   <script>
     const API_ENDPOINT  = 'https://kotorinosu-api.vercel.app/api/line-notify';
-    const STORAGE_KEY   = 'kotorinosu_shortcuts';
+    const STORAGE_KEY   = 'kotorinosu_blocks';
+    const DEFAULT_TEXT  = 'タイトル\n\n本文';
 
-    const sendBtn           = document.getElementById('sendBtn');
-    const messageText       = document.getElementById('messageText');
-    const feedback          = document.getElementById('feedback');
-    const shortcutsList     = document.getElementById('shortcutsList');
-    const addShortcutBtn    = document.getElementById('addShortcutBtn');
-    const shortcutForm      = document.getElementById('shortcutForm');
-    const shortcutLabelInput = document.getElementById('shortcutLabel');
-    const shortcutTextInput = document.getElementById('shortcutText');
-    const cancelShortcutBtn = document.getElementById('cancelShortcutBtn');
-    const saveShortcutBtn   = document.getElementById('saveShortcutBtn');
+    const blockList  = document.getElementById('blockList');
+    const addBlockBtn = document.getElementById('addBlockBtn');
+    const feedback   = document.getElementById('feedback');
 
-    // フィードバック表示ユーティリティ
+    // フィードバック表示
     function showFeedback(message, type) {
       feedback.textContent = message;
-      feedback.className = type; // 'success' | 'error' | 'warn'
+      feedback.className = type;
     }
 
-    // ---- ショートカット管理 ----
+    // ---- ブロックデータの永続化 ----
 
-    function loadShortcuts() {
+    function loadBlocks() {
       try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      } catch {
-        return [];
-      }
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (Array.isArray(saved) && saved.length > 0) return saved;
+      } catch { /* 無視 */ }
+      return [{ id: String(Date.now()), text: DEFAULT_TEXT }];
     }
 
-    function saveShortcutsToStorage(shortcuts) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(shortcuts));
+    // DOMから現在のブロック状態を読み取ってlocalStorageに保存
+    function saveBlocks() {
+      const blocks = [...blockList.querySelectorAll('.notify-block')].map(el => ({
+        id: el.dataset.id,
+        text: el.querySelector('.block-textarea').value,
+      }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
     }
 
-    function renderShortcuts() {
-      // 既存のショートカットボタンをリセット（追加ボタンは残す）
-      shortcutsList.querySelectorAll('.shortcut-btn').forEach(el => el.remove());
-
-      const shortcuts = loadShortcuts();
-      shortcuts.forEach((sc, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'shortcut-btn';
-        btn.dataset.index = index;
-        btn.innerHTML =
-          `<span class="shortcut-label-text">${escapeHtml(sc.label)}</span>` +
-          `<span class="shortcut-delete" data-index="${index}" title="削除">✕</span>`;
-
-        btn.addEventListener('click', (e) => {
-          const deleteEl = e.target.closest('.shortcut-delete');
-          if (deleteEl) {
-            // 削除処理
-            const idx = parseInt(deleteEl.dataset.index, 10);
-            const arr = loadShortcuts();
-            arr.splice(idx, 1);
-            saveShortcutsToStorage(arr);
-            renderShortcuts();
-          } else {
-            // テキストエリアにプリセット文章をセット
-            messageText.value = sc.text;
-            messageText.focus();
-          }
-        });
-
-        // 追加ボタンの直前に挿入
-        shortcutsList.insertBefore(btn, addShortcutBtn);
+    // ブロックが1つのとき削除ボタンを非表示にする
+    function updateDeleteButtons() {
+      const blocks = blockList.querySelectorAll('.notify-block');
+      const showDelete = blocks.length > 1;
+      blocks.forEach(block => {
+        block.querySelector('.block-delete-btn').style.display = showDelete ? '' : 'none';
       });
     }
 
-    // XSS対策: HTMLエスケープ
-    function escapeHtml(str) {
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    }
+    // ---- ブロック生成 ----
 
-    // ショートカット追加フォームの開閉
-    addShortcutBtn.addEventListener('click', () => {
-      shortcutForm.classList.add('visible');
-      shortcutLabelInput.focus();
-      addShortcutBtn.style.display = 'none';
-    });
+    function createBlock(block) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'notify-block';
+      wrapper.dataset.id = block.id;
 
-    cancelShortcutBtn.addEventListener('click', () => {
-      closeShortcutForm();
-    });
+      // --- 削除ボタン行 ---
+      const blockTop = document.createElement('div');
+      blockTop.className = 'block-top';
 
-    saveShortcutBtn.addEventListener('click', () => {
-      const label = shortcutLabelInput.value.trim();
-      const text  = shortcutTextInput.value.trim();
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'block-delete-btn';
+      deleteBtn.textContent = '削除';
+      deleteBtn.addEventListener('click', () => {
+        wrapper.remove();
+        saveBlocks();
+        updateDeleteButtons();
+      });
+      blockTop.appendChild(deleteBtn);
 
-      if (!label) {
-        shortcutLabelInput.focus();
-        return;
-      }
-      if (!text) {
-        shortcutTextInput.focus();
-        return;
-      }
+      // --- テキストエリア ---
+      const textarea = document.createElement('textarea');
+      textarea.className = 'block-textarea';
+      textarea.value = block.text;
+      textarea.addEventListener('input', saveBlocks);
 
-      const shortcuts = loadShortcuts();
-      shortcuts.push({ label, text });
-      saveShortcutsToStorage(shortcuts);
-      renderShortcuts();
-      closeShortcutForm();
-    });
+      // --- 送信エリア ---
+      const sendArea = document.createElement('div');
+      sendArea.className = 'send-area';
 
-    function closeShortcutForm() {
-      shortcutForm.classList.remove('visible');
-      shortcutLabelInput.value = '';
-      shortcutTextInput.value  = '';
-      addShortcutBtn.style.display = '';
-    }
+      const sendBtn = document.createElement('button');
+      sendBtn.className = 'send-btn';
+      sendBtn.textContent = '🎂 この内容で送信する';
 
-    // ---- 送信処理 ----
+      // --- 確認パネル ---
+      const confirmPanel = document.createElement('div');
+      confirmPanel.className = 'confirm-panel';
+      confirmPanel.innerHTML = `
+        <div class="confirm-inner">
+          <p class="confirm-heading">📨 この内容を送信しますか？</p>
+          <div class="confirm-preview"></div>
+          <div class="confirm-actions">
+            <button class="cancel-confirm-btn">キャンセル</button>
+            <button class="do-send-btn">✓ 送信する</button>
+          </div>
+        </div>
+      `;
 
-    const confirmPanel    = document.getElementById('confirmPanel');
-    const confirmPreview  = document.getElementById('confirmPreview');
-    const cancelConfirmBtn = document.getElementById('cancelConfirmBtn');
-    const confirmSendBtn  = document.getElementById('confirmSendBtn');
+      const confirmPreview = confirmPanel.querySelector('.confirm-preview');
+      const cancelBtn      = confirmPanel.querySelector('.cancel-confirm-btn');
+      const doSendBtn      = confirmPanel.querySelector('.do-send-btn');
 
-    // 確認パネルを開く
-    function openConfirm(text) {
-      confirmPreview.textContent = text;
-      sendBtn.classList.add('hidden');
-      confirmPanel.classList.add('visible');
-      // パネルが見えてからフォーカス（アクセシビリティ）
-      setTimeout(() => confirmSendBtn.focus(), 300);
-    }
-
-    // 確認パネルを閉じる
-    function closeConfirm() {
-      confirmPanel.classList.remove('visible');
-      sendBtn.classList.remove('hidden');
-    }
-
-    // 送信ボタン → 確認パネルを展開
-    sendBtn.addEventListener('click', () => {
-      const text = messageText.value.trim();
-
-      if (text === '') {
-        showFeedback('文章を入力してください', 'warn');
-        messageText.focus();
-        return;
+      function openConfirm(text) {
+        confirmPreview.textContent = text;
+        sendBtn.classList.add('hidden');
+        confirmPanel.classList.add('visible');
+        setTimeout(() => doSendBtn.focus(), 300);
       }
 
-      feedback.textContent = '';
-      feedback.className = '';
-      openConfirm(text);
-    });
-
-    // キャンセル → パネルを閉じて送信ボタンに戻る
-    cancelConfirmBtn.addEventListener('click', () => {
-      closeConfirm();
-    });
-
-    // ESCキーでもキャンセル可能
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && confirmPanel.classList.contains('visible')) {
-        closeConfirm();
+      function closeConfirm() {
+        confirmPanel.classList.remove('visible');
+        sendBtn.classList.remove('hidden');
       }
-    });
 
-    // 確定ボタン → 実際に送信
-    confirmSendBtn.addEventListener('click', async () => {
-      const text = confirmPreview.textContent;
+      // 送信ボタン → 確認パネルを展開
+      sendBtn.addEventListener('click', () => {
+        const text = textarea.value.trim();
+        if (!text) {
+          showFeedback('文章を入力してください', 'warn');
+          textarea.focus();
+          return;
+        }
+        feedback.textContent = '';
+        feedback.className   = '';
+        openConfirm(text);
+      });
 
-      confirmSendBtn.disabled = true;
-      cancelConfirmBtn.disabled = true;
+      // キャンセル
+      cancelBtn.addEventListener('click', closeConfirm);
 
-      try {
-        const res = await fetch(API_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text }),
-        });
+      // 送信確定
+      doSendBtn.addEventListener('click', async () => {
+        const text = confirmPreview.textContent;
+        doSendBtn.disabled = true;
+        cancelBtn.disabled = true;
 
-        if (res.ok) {
-          closeConfirm();
-          showFeedback('✅ 送信しました！', 'success');
-        } else {
-          const data = await res.json().catch(() => ({}));
-          console.error('API エラー:', data);
+        try {
+          const res = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text }),
+          });
+
+          if (res.ok) {
+            closeConfirm();
+            showFeedback('✅ 送信しました！', 'success');
+          } else {
+            const data = await res.json().catch(() => ({}));
+            console.error('API エラー:', data);
+            showFeedback('❌ 送信に失敗しました', 'error');
+            closeConfirm();
+          }
+        } catch (err) {
+          console.error('通信エラー:', err);
           showFeedback('❌ 送信に失敗しました', 'error');
           closeConfirm();
+        } finally {
+          doSendBtn.disabled = false;
+          cancelBtn.disabled = false;
         }
-      } catch (err) {
-        console.error('通信エラー:', err);
-        showFeedback('❌ 送信に失敗しました', 'error');
-        closeConfirm();
-      } finally {
-        confirmSendBtn.disabled = false;
-        cancelConfirmBtn.disabled = false;
-      }
+      });
+
+      sendArea.appendChild(sendBtn);
+      sendArea.appendChild(confirmPanel);
+
+      wrapper.appendChild(blockTop);
+      wrapper.appendChild(textarea);
+      wrapper.appendChild(sendArea);
+
+      return wrapper;
+    }
+
+    // 全ブロックを描画
+    function renderBlocks() {
+      blockList.innerHTML = '';
+      loadBlocks().forEach(block => blockList.appendChild(createBlock(block)));
+      updateDeleteButtons();
+    }
+
+    // ブロック追加
+    addBlockBtn.addEventListener('click', () => {
+      const newBlock = { id: String(Date.now()), text: '' };
+      const el = createBlock(newBlock);
+      blockList.appendChild(el);
+      saveBlocks();
+      updateDeleteButtons();
+      // 追加したブロックのテキストエリアへスクロール＆フォーカス
+      el.querySelector('.block-textarea').focus();
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // ESCキーで開いている確認パネルをすべて閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      blockList.querySelectorAll('.confirm-panel.visible').forEach(panel => {
+        panel.classList.remove('visible');
+        panel.closest('.send-area').querySelector('.send-btn').classList.remove('hidden');
+      });
     });
 
     // 初期描画
-    renderShortcuts();
+    renderBlocks();
   </script>
 
 </body>
